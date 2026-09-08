@@ -1,0 +1,86 @@
+.letter-paper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 3 / 4;
+  margin: 0 auto;
+  background: var(--paper-bg);
+  border-radius: 6px;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.6) inset,
+    0 18px 40px rgba(92, 68, 51, 0.22);
+  transform: rotate(-1deg);
+  overflow: hidden;
+  color: var(--paper-ink);
+}
+
+.letter-paper-texture {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(92, 68, 51, 0.05) 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.letter-paper-content {
+  position: relative;
+  z-index: 1;
+  padding: 34px 30px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.letter-greeting,
+.letter-greeting-input {
+  font-family: var(--font-hand);
+  font-size: 40px;
+  font-weight: 400;
+  margin: 0 0 12px;
+  color: var(--paper-ink);
+}
+
+.letter-greeting-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  border-bottom: 2px dashed rgba(92, 68, 51, 0.2);
+  padding-bottom: 4px;
+}
+
+.letter-message,
+.letter-message-input {
+  font-family: var(--font-hand);
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--paper-ink);
+  flex: 1;
+  white-space: pre-wrap;
+}
+
+.letter-message-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  resize: none;
+  width: 100%;
+}
+
+.letter-message-input::placeholder {
+  color: rgba(92, 68, 51, 0.4);
+}
+
+.letter-paper-stickers {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.static-sticker {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1px rgba(92, 68, 51, 0.15));
+}

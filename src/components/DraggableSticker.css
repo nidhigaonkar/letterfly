@@ -1,0 +1,61 @@
+.draggable-sticker {
+  position: absolute;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: grab;
+  filter: drop-shadow(0 1px 1px rgba(92, 68, 51, 0.15));
+  user-select: none;
+}
+
+.draggable-sticker:active {
+  cursor: grabbing;
+}
+
+.draggable-sticker.selected {
+  outline: 2px dashed rgba(92, 68, 51, 0.35);
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+
+.sticker-toolbar {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  background: #fffaf3;
+  border: 1px solid rgba(92, 68, 51, 0.15);
+  border-radius: 999px;
+  padding: 4px 6px;
+  box-shadow: 0 4px 10px rgba(92, 68, 51, 0.18);
+  white-space: nowrap;
+}
+
+.sticker-toolbar button {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: #f4ecd8;
+  color: #5c4433;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sticker-toolbar button:hover {
+  background: #f0e2c0;
+}
+
+.sticker-toolbar button.danger {
+  background: #f2a9b8;
+  color: #6a2a36;
+}
+
+.sticker-toolbar button.danger:hover {
+  background: #e08fa3;
+}

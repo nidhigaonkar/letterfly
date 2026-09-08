@@ -1,0 +1,65 @@
+:root {
+  --cream: #fdf8ef;
+  --cream-dark: #f5ecd9;
+  --ink: #5c4433;
+  --ink-soft: #8a7360;
+  --blush: #fbe9ee;
+  --blush-deep: #e08fa3;
+  --lavender: #f0e9f8;
+  --sage: #e8f3e6;
+  --butter: #fdf6e0;
+  --peach: #fdece0;
+  --accent: #e08fa3;
+  --accent-2: #a7c7e7;
+  --shadow-soft: 0 10px 30px rgba(92, 68, 51, 0.15);
+  --font-hand: 'Parisienne', cursive;
+  --font-ui: 'Quicksand', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: var(--cream);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(224, 143, 163, 0.08) 0, transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(167, 199, 231, 0.1) 0, transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(201, 223, 192, 0.12) 0, transparent 40%);
+  background-attachment: fixed;
+}
+
+button {
+  font-family: var(--font-ui);
+}
+
+a {
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  padding: 20px 28px;
+}
+
+.app-logo {
+  font-family: var(--font-hand);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+}

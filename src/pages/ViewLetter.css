@@ -1,0 +1,38 @@
+.view-letter-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.not-found {
+  flex-direction: column;
+  text-align: center;
+  gap: 6px;
+  color: var(--ink-soft);
+}
+
+.not-found-emoji {
+  font-size: 48px;
+  margin: 0;
+}
+
+.not-found h1 {
+  font-family: var(--font-hand);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 6px 0;
+}
+
+.not-found a {
+  margin-top: 14px;
+  color: var(--blush-deep);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.not-found a:hover {
+  text-decoration: underline;
+}

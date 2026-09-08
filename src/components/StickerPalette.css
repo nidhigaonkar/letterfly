@@ -1,0 +1,54 @@
+.sticker-palette {
+  background: #fffaf3;
+  border: 1px solid rgba(92, 68, 51, 0.1);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.panel-label {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+
+.sticker-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.sticker-palette-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--cream-dark);
+  border: 1px solid rgba(92, 68, 51, 0.08);
+  border-radius: 14px;
+  padding: 10px 6px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.sticker-palette-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(92, 68, 51, 0.15);
+}
+
+.sticker-palette-preview {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.sticker-palette-name {
+  font-size: 11px;
+  text-align: center;
+  color: var(--ink-soft);
+  line-height: 1.2;
+}
