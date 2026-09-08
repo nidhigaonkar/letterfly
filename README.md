@@ -1,16 +1,22 @@
-# React + Vite
+# letterfly
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A scrapbooky, decorate-it-yourself letter-writing app. Pick a pastel paper color and handwriting
+font, write a message, drag on paper stars, flowers, bouquets, bows, and washi tape, then seal it
+and share a link.
 
-Currently, two official plugins are available:
+## Running locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+## How it works
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- The letter (text, paper color, font, and sticker placement) is encoded into the share link itself
+  — there's no backend or database.
+- Opening a share link shows a sealed envelope that animates open to reveal the letter.
 
-## Expanding the Oxlint configuration
+## Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+React + Vite, react-router-dom (hash-based routing so it works on any static host).
