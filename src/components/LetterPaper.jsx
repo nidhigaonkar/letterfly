@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import DraggableSticker from './DraggableSticker';
 import Sticker from './Sticker';
 import { STICKER_TYPES, PAPER_COLORS } from '../data/stickers';
+import { getFontFamily } from '../data/fonts';
 import './LetterPaper.css';
 
 export default function LetterPaper({
@@ -17,12 +18,13 @@ export default function LetterPaper({
   const internalRef = useRef(null);
   const cardRef = externalRef || internalRef;
   const paper = PAPER_COLORS.find((p) => p.id === letter.paper) || PAPER_COLORS[0];
+  const fontFamily = getFontFamily(letter.font);
 
   return (
     <div
       ref={cardRef}
       className="letter-paper"
-      style={{ '--paper-bg': paper.bg, '--paper-ink': paper.ink }}
+      style={{ '--paper-bg': paper.bg, '--paper-ink': paper.ink, '--font-hand': fontFamily }}
       onPointerDown={() => editable && onSelectSticker(null)}
     >
       <div className="letter-paper-texture" />

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import LetterPaper from '../components/LetterPaper';
 import StickerPalette from '../components/StickerPalette';
 import { PAPER_COLORS, makeSticker } from '../data/stickers';
+import { FONT_OPTIONS, DEFAULT_FONT } from '../data/fonts';
 import { encodeLetter } from '../utils/encode';
 import './Editor.css';
 
@@ -10,6 +11,7 @@ const initialLetter = {
   greeting: 'Dear ___,',
   message: '',
   paper: 'blush',
+  font: DEFAULT_FONT,
   stickers: [],
 };
 
@@ -66,12 +68,27 @@ export default function Editor() {
           </div>
         </div>
 
+        <div className="panel-group">
+          <p className="panel-label">Handwriting style</p>
+          <div className="font-options">
+            {FONT_OPTIONS.map((f) => (
+              <button
+                key={f.id}
+                className={`font-option${letter.font === f.id ? ' active' : ''}`}
+                style={{ fontFamily: f.family }}
+                onClick={() => updateField('font', f.id)}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <StickerPalette onAdd={addSticker} />
 
         <button className="seal-button" disabled={!canSeal} onClick={handleSeal}>
           Seal &amp; Share
         </button>
-        {!canSeal && <p className="seal-hint">Write a little message first</p>}
       </aside>
 
       <main className="editor-card-area">

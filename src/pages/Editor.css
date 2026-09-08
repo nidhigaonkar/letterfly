@@ -40,19 +40,26 @@
   box-shadow: 0 0 0 3px rgba(92, 68, 51, 0.2);
 }
 
-.text-input {
-  width: 100%;
-  font-family: var(--font-ui);
-  font-size: 14px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(92, 68, 51, 0.2);
-  background: var(--cream-dark);
-  color: var(--ink);
+.font-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.text-input:focus {
-  outline: 2px solid var(--accent-2);
+.font-option {
+  text-align: left;
+  font-size: 20px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(92, 68, 51, 0.15);
+  background: var(--cream-dark);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.font-option.active {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 2px rgba(167, 199, 231, 0.4);
 }
 
 .seal-button {
@@ -72,13 +79,6 @@
   background: #d9c9c0;
   cursor: not-allowed;
   box-shadow: none;
-}
-
-.seal-hint {
-  text-align: center;
-  font-size: 12px;
-  color: var(--ink-soft);
-  margin: -8px 0 0;
 }
 
 .editor-card-area {
