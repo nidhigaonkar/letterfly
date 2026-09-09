@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import DraggableSticker from './DraggableSticker';
 import Sticker from './Sticker';
 import { STICKER_TYPES, PAPER_COLORS } from '../data/stickers';
@@ -14,11 +14,43 @@ export default function LetterPaper({
   onDeleteSticker,
   onChangeField,
   cardRef: externalRef,
+  drawMode = false,
+  onAddStroke,
 }) {
   const internalRef = useRef(null);
   const cardRef = externalRef || internalRef;
   const paper = PAPER_COLORS.find((p) => p.id === letter.paper) || PAPER_COLORS[0];
   const fontFamily = getFontFamily(letter.font);
+  const [currentPoints, setCurrentPoints] = useState([]);
+
+  function pointFromEvent(e) {
+    const rect = cardRef.current.getBoundingClientRect();
+    return {
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    };
+  }
+
+  function handleDrawPointerDown(e) {
+    e.stopPropagation();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setCurrentPoints([pointFromEvent(e)]);
+  }
+
+  function handleDrawPointerMove(e) {
+    if (currentPoints.length === 0) return;
+    setCurrentPoints((prev) => [...prev, pointFromEvent(e)]);
+  }
+
+  function handleDrawPointerUp(e) {
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      /* pointer already released */
+    }
+    if (currentPoints.length > 1) onAddStroke(currentPoints, paper.ink);
+    setCurrentPoints([]);
+  }
 
   return (
     <div
@@ -83,6 +115,38 @@ export default function LetterPaper({
           );
         })}
       </div>
+      <svg
+        className={`letter-paper-drawing${editable && drawMode ? ' active' : ''}`}
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        onPointerDown={editable && drawMode ? handleDrawPointerDown : undefined}
+        onPointerMove={editable && drawMode ? handleDrawPointerMove : undefined}
+        onPointerUp={editable && drawMode ? handleDrawPointerUp : undefined}
+      >
+        {(letter.drawing || []).map((stroke) => (
+          <polyline
+            key={stroke.id}
+            points={stroke.points.map((p) => `${p.x},${p.y}`).join(' ')}
+            fill="none"
+            stroke={stroke.color}
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        ))}
+        {currentPoints.length > 1 && (
+          <polyline
+            points={currentPoints.map((p) => `${p.x},${p.y}`).join(' ')}
+            fill="none"
+            stroke={paper.ink}
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        )}
+      </svg>
     </div>
   );
 }

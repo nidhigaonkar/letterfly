@@ -45,6 +45,7 @@ export const STICKER_TYPES = [
 ];
 
 export const PAPER_COLORS = [
+  { id: 'white', label: 'White', bg: '#ffffff', ink: '#5c4433' },
   { id: 'blush', label: 'Blush', bg: '#fbe9ee', ink: '#7a4a52' },
   { id: 'butter', label: 'Butter', bg: '#fdf6e0', ink: '#7a6a3a' },
   { id: 'mint', label: 'Mint', bg: '#e8f3e6', ink: '#3f5c3f' },

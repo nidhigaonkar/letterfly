@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LetterPaper from '../components/LetterPaper';
-import StickerPalette from '../components/StickerPalette';
-import { PAPER_COLORS, makeSticker } from '../data/stickers';
+import { PencilIcon } from '../components/Icons';
+import { PAPER_COLORS } from '../data/stickers';
 import { FONT_OPTIONS, DEFAULT_FONT } from '../data/fonts';
 import { encodeLetter } from '../utils/encode';
 import './Editor.css';
@@ -13,22 +13,18 @@ const initialLetter = {
   paper: 'blush',
   font: DEFAULT_FONT,
   stickers: [],
+  drawing: [],
 };
 
 export default function Editor() {
   const [letter, setLetter] = useState(initialLetter);
   const [selectedStickerId, setSelectedStickerId] = useState(null);
+  const [drawMode, setDrawMode] = useState(false);
   const cardRef = useRef(null);
   const navigate = useNavigate();
 
   function updateField(field, value) {
     setLetter((prev) => ({ ...prev, [field]: value }));
-  }
-
-  function addSticker(type) {
-    const sticker = makeSticker(type);
-    setLetter((prev) => ({ ...prev, stickers: [...prev.stickers, sticker] }));
-    setSelectedStickerId(sticker.id);
   }
 
   function changeSticker(id, updates) {
@@ -41,6 +37,17 @@ export default function Editor() {
   function deleteSticker(id) {
     setLetter((prev) => ({ ...prev, stickers: prev.stickers.filter((s) => s.id !== id) }));
     setSelectedStickerId(null);
+  }
+
+  function addStroke(points, color) {
+    setLetter((prev) => ({
+      ...prev,
+      drawing: [...prev.drawing, { id: `stroke-${Date.now()}-${Math.floor(Math.random() * 10000)}`, points, color }],
+    }));
+  }
+
+  function undoStroke() {
+    setLetter((prev) => ({ ...prev, drawing: prev.drawing.slice(0, -1) }));
   }
 
   function handleSeal() {
@@ -84,7 +91,28 @@ export default function Editor() {
           </div>
         </div>
 
-        <StickerPalette onAdd={addSticker} />
+        <div className="panel-group">
+          <p className="panel-label">Draw</p>
+          <div className="draw-tools">
+            <button
+              type="button"
+              className={`draw-toggle${drawMode ? ' active' : ''}`}
+              onClick={() => setDrawMode((v) => !v)}
+              title={drawMode ? 'Stop drawing' : 'Draw on your letter'}
+            >
+              <PencilIcon />
+            </button>
+            <button
+              type="button"
+              className="draw-undo"
+              disabled={letter.drawing.length === 0}
+              onClick={undoStroke}
+              title="Undo last stroke"
+            >
+              Undo
+            </button>
+          </div>
+        </div>
 
         <button className="seal-button" disabled={!canSeal} onClick={handleSeal}>
           Seal &amp; Share
@@ -101,6 +129,8 @@ export default function Editor() {
           onChangeSticker={changeSticker}
           onDeleteSticker={deleteSticker}
           onChangeField={updateField}
+          drawMode={drawMode}
+          onAddStroke={addStroke}
         />
       </main>
     </div>

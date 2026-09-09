@@ -23,6 +23,16 @@
   box-shadow: var(--shadow-soft);
 }
 
+.panel-label {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+
 .paper-swatches {
   display: flex;
   gap: 10px;
@@ -60,6 +70,49 @@
 .font-option.active {
   border-color: var(--accent-2);
   box-shadow: 0 0 0 2px rgba(167, 199, 231, 0.4);
+}
+
+.draw-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.draw-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(92, 68, 51, 0.15);
+  background: var(--cream-dark);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.draw-toggle.active {
+  border-color: var(--accent-2);
+  background: var(--accent-2);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(167, 199, 231, 0.4);
+}
+
+.draw-undo {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(92, 68, 51, 0.15);
+  background: var(--cream-dark);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.draw-undo:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .seal-button {

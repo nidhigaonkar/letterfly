@@ -29,7 +29,6 @@ export default function Sent() {
     <div className="sent-page">
       <div className="sent-seal">💌</div>
       <h1>Your letter is ready to share!</h1>
-      <p className="sent-subtitle">Copy the link below and send it however you like.</p>
 
       <div className="share-link-box">
         <input className="share-link-input" readOnly value={shareUrl} onFocus={(e) => e.target.select()} />

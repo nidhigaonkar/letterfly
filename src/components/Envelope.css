@@ -6,15 +6,21 @@
   perspective: 1200px;
 }
 
-.envelope {
+.envelope-stack {
   position: relative;
   width: min(78vw, 340px);
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
   aspect-ratio: 3 / 2;
   border: none;
   padding: 0;
   cursor: pointer;
   background: none;
   transform-style: preserve-3d;
+  z-index: 2;
 }
 
 .envelope-back {
@@ -54,22 +60,17 @@
   left: 0;
   width: 100%;
   height: 58%;
-  background: #ffffff;
-  border: 1px solid rgba(92, 68, 51, 0.12);
+  background: #fbf8f3;
+  border: 1px solid rgba(92, 68, 51, 0.18);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
-  transition: transform 0.75s cubic-bezier(0.6, 0.05, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
-  box-shadow: 0 2px 6px rgba(92, 68, 51, 0.1);
+  box-shadow: 0 2px 6px rgba(92, 68, 51, 0.15);
 }
 
 .envelope.opening .envelope-flap {
-  transform: rotateX(180deg);
-}
-
-.envelope.opening {
-  transition: opacity 0.35s ease 0.75s;
-  opacity: 0;
+  transform: scaleY(-1);
 }
 
 .envelope-seal {
@@ -85,6 +86,76 @@
 .envelope.opening .envelope-seal {
   opacity: 0;
   transition: opacity 0.2s ease;
+}
+
+.envelope-to {
+  position: absolute;
+  top: 78%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 22px;
+  color: var(--ink-soft);
+  z-index: 1;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.envelope.opening .envelope-to {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.envelope-letter-slot {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  width: 88%;
+  transform-origin: bottom center;
+  z-index: 3;
+  opacity: 0;
+  transform: translateX(-50%) translateY(6%);
+  clip-path: inset(0 0 88% 0);
+  transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.3, 1), clip-path 0.5s cubic-bezier(0.22, 0.8, 0.3, 1), opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.envelope-stack.stage-peeking .envelope-letter-slot {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-14%);
+  clip-path: inset(0 0 78% 0);
+}
+
+.envelope-pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.envelope-pocket::before,
+.envelope-pocket::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 0 0 10px 10px;
+}
+
+.envelope-pocket::before {
+  left: 0;
+  background: #ffffff;
+  clip-path: polygon(0 100%, 100% 62%, 100% 100%);
+  border-right: 1px solid rgba(92, 68, 51, 0.2);
+}
+
+.envelope-pocket::after {
+  right: 0;
+  background: #ffffff;
+  clip-path: polygon(100% 100%, 0 62%, 0 100%);
 }
 
 .envelope-hint {
