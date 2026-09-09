@@ -1,8 +1,6 @@
 # letterfly
 
 A letter-writing app. 
-## Running locally
-
 
 ## Stack
 
